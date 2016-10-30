@@ -24,6 +24,7 @@
 
 @implementation RCTBMKMapView{
     NSMutableArray<RCTBDMapMarker*> *_markers;
+    BMKPolyline* trace;
 }
 
 - (instancetype)init {
@@ -61,6 +62,24 @@
     }
 }
 
+- (void)setTraceData:(NSArray*) data
+{
+    if (self->trace != nil){
+        [self removeOverlay: self->trace];
+        self->trace = nil;
+    }
+    if (data != nil) {
+        const int count = [data count];
+        CLLocationCoordinate2D coords[count];
+        for (int i = 0; i < count; i++) {
+            coords[i].longitude = [data[i][0] doubleValue];
+            coords[i].latitude = [data[i][1] doubleValue];
+        }
+        self->trace = [BMKPolyline polylineWithCoordinates:coords count:count];
+        [self addOverlay:self->trace];
+    }
+}
+
 @end
 
 @implementation RCTBDMapManager
@@ -85,6 +104,13 @@ RCT_CUSTOM_VIEW_PROPERTY(region, BMKCoordinateRegion, RCTBMKMapView)
     }
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(traceData, NSArray*, RCTBMKMapView)
+{
+    if (json) {
+        [view setTraceData: json];
+    }
+}
+
 - (void)mapView:(RCTBMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
     if (mapView.onRegionChange) {
         mapView.onRegionChange([RCTBDMap _convertRegion:mapView.region]);
@@ -102,6 +128,18 @@ RCT_CUSTOM_VIEW_PROPERTY(region, BMKCoordinateRegion, RCTBMKMapView)
     if ((mapView).onLoad) {
         (mapView).onLoad(@{});
     }
+}
+
+// Override
+- (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay{
+    if ([overlay isKindOfClass:[BMKPolyline class]]){
+        BMKPolylineView* polylineView = [[BMKPolylineView alloc] initWithOverlay:overlay];
+        polylineView.strokeColor = [[UIColor purpleColor] colorWithAlphaComponent:1];
+        polylineView.lineWidth = 5.0;
+
+        return polylineView;
+    }
+    return nil;
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation

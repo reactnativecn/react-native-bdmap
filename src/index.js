@@ -4,7 +4,7 @@
 
 import React, {
   NativeModules,
-  DeviceEventEmitter,
+  NativeAppEventEmitter,
 } from 'react-native';
 
 const NativeBDMap = NativeModules.BaiduMap;
@@ -21,11 +21,11 @@ exports.watchPosition = function (callback, error, options) {
   const watchId = subscriptions.length;
   subscriptions.push(
     [
-      DeviceEventEmitter.addListener(
+      NativeAppEventEmitter.addListener(
         'BDMapLocation',
         callback
       ),
-      error ? DeviceEventEmitter.addListener(
+      error ? NativeAppEventEmitter.addListener(
         'BDMapLocationError',
         error
       ) : null
@@ -69,5 +69,8 @@ exports.getLocation = async function(options) {
     exports.clearWatch(watchId);
   }
 }
+
+exports.geoReverse = NativeBDMap.geoReverse;
+exports.poiSearch = NativeBDMap.poiSearch;
 
 exports.BDMapView = require('./BDMapView');

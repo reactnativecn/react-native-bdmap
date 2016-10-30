@@ -2,9 +2,9 @@
  * Created by tdzl2003 on 4/25/16.
  */
 
-import React, {
+import React, {PropTypes} from 'react';
+import {
   requireNativeComponent,
-  PropTypes,
   View,
 } from 'react-native'
 
@@ -83,6 +83,8 @@ class BDMapView extends React.Component {
       id: React.PropTypes.string,
 
     })),
+
+    traceData: React.PropTypes.arrayOf(React.PropTypes.arrayOf(React.PropTypes.number)),
 
     // 事件
     onLoad: PropTypes.func,
@@ -181,8 +183,6 @@ class BDMapView extends React.Component {
     //if (this._focusMarker) {
     //  infoWindow = this._focusMarker.renderInfoWindow();
     //}
-
-    console.log(loaded, annotations);
 
     return (
       <RCTBDMapView

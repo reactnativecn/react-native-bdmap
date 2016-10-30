@@ -7,10 +7,13 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.Overlay;
+import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
@@ -47,6 +50,12 @@ public class BDMapExtraData implements LifecycleEventListener, BaiduMap.OnMapLoa
 
     public void onDropViewInstance() {
         reactContext.removeLifecycleEventListener(this);
+        UiThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                extraDataMap.remove(view);
+            }
+        });
     }
 
     /* 应用生命周期跟踪 */
@@ -152,5 +161,21 @@ public class BDMapExtraData implements LifecycleEventListener, BaiduMap.OnMapLoa
                 view.getId(),
                 "topLoad",
                 null);
+    }
+
+    private Overlay trace;
+    public void setTraceData(ReadableArray traceData) {
+        if (trace != null) {
+            trace.remove();
+            trace = null;
+        }
+        if (traceData != null && traceData.size() >= 2) {
+            List<LatLng> pts = new ArrayList<LatLng>();
+            for (int i = 0; i < traceData.size(); i++){
+                ReadableArray item = traceData.getArray(i);
+                pts.add(new LatLng(item.getDouble(1), item.getDouble(0)));
+            }
+            trace = view.getMap().addOverlay(new PolylineOptions().points(pts).color(0xffff00ff).width(5));
+        }
     }
 }

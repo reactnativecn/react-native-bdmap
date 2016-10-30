@@ -4,10 +4,12 @@ import android.view.View;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
@@ -62,8 +64,8 @@ public class BDMapManager extends ViewGroupManager<MapView>  {
         }
         double longitude = region.getDouble("longitude");
         double latitude = region.getDouble("latitude");
-        double longitudeDelta = region.getDouble("longitudeDelta") / 2;
-        double latitudeDelta = region.getDouble("latitudeDelta") / 2;
+        double longitudeDelta = region.hasKey("longitudeDelta") ? region.getDouble("longitudeDelta") / 2 : 0;
+        double latitudeDelta = region.hasKey("latitudeDelta") ? region.getDouble("latitudeDelta") / 2 : 0;
 
         view.getMap().setMapStatusLimits(
                 new LatLngBounds.Builder()
@@ -71,6 +73,11 @@ public class BDMapManager extends ViewGroupManager<MapView>  {
                         .include(new LatLng(latitude + latitudeDelta, longitude + longitudeDelta))
                         .build()
         );
+    }
+
+    @ReactProp(name="traceData")
+    public void setTraceData(MapView view, ReadableArray arr) {
+        BDMapExtraData.getExtraData(view).setTraceData(arr);
     }
 
 

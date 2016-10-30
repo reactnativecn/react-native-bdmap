@@ -2,14 +2,13 @@
  * Created by tdzl2003 on 4/25/16.
  */
 
-import React, {
+import React, {PropTypes} from 'react';
+import {
   requireNativeComponent,
-  PropTypes,
   View,
   UIManager,
+  findNodeHandle,
 } from 'react-native'
-
-require('react-native/Libraries/NativeApp/RCTNativeAppEventEmitter');
 
 //const BDMapInfoWindow = require('./BDMapInfoWindow');
 var resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
@@ -68,7 +67,7 @@ class BDMapMarker extends React.Component {
   }
   componentDidMount() {
     UIManager.dispatchViewManagerCommand(
-      React.findNodeHandle(this),
+      findNodeHandle(this),
       UIManager.RCTBDMapMarker.Commands.display,
       null
     );
@@ -98,7 +97,7 @@ class BDMapMarker extends React.Component {
   };
   onFocus = () => {
     const {onFocus} = this.props;
-    onFocus && onFocus();
+    onFocus && onFocus(this.props.id);
   };
   render() {
     var icon = resolveAssetSource(this.props.icon || defaultMarkerIcon);

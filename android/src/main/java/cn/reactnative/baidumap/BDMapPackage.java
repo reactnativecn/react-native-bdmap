@@ -19,7 +19,7 @@ public class BDMapPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.asList(new NativeModule[]{
                 // Modules from third-party
-                new BDMapModule(reactContext),
+                new BDMapModule(reactContext)
         });
     }
 

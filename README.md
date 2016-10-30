@@ -8,7 +8,7 @@ npm install -g rnpm
 
 ```
 npm install react-native-bdmap
-rnpm link react-native-bdmap
+react-native link react-native-bdmap
 ```
 
 此时应看到输出
@@ -26,12 +26,19 @@ Android: 入口代码
 
 在`android/app/src/main/你的包名/MainActivity.java`中增加如下代码:
 
-```
+```java
+import android.os.Bundle;
+import com.baidu.mapapi.SDKInitializer;
+
+public class MainActivity extends ReactActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(this.getApplicationContext());
     }
+    ...
+}
 ```
 
 Android: 添加混淆规则:
@@ -89,13 +96,13 @@ iOS: 配置Info.plist
 
 iOS: 添加依赖
 
-将`node_modules/react-native-baidu-map/ios/SDK/`下四个.framework文件拖入工程
+将`node_modules/react-native-baidu-map/ios/SDK/`下所有.framework文件拖入工程
 
 并将`node_modules/react-native-baidu-map/ios/SDK/BaiduMapAPI_Map.framework/Resources/mapapi.bundle`拖入工程
 
 在Build Settings中的Framework Search Paths中,增加:
 
-`$(SRCROOT)/../node_modules/react-native-baidu-map/ios/SDK`
+`$(SRCROOT)/../node_modules/react-native-bdmap/ios/SDK`
 
 在Build Phases中的Link Binary With Libraries中,增加:
 

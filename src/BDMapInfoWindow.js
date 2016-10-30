@@ -2,9 +2,9 @@
  * Created by tdzl2003 on 4/25/16.
  */
 
-import React, {
+import React, {PropTypes} from 'react';
+import {
   requireNativeComponent,
-  PropTypes,
   View,
   UIManager,
 } from 'react-native'

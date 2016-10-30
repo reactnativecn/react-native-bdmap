@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		091037E81D07291C00AA5038 /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 091037E71D07291C00AA5038 /* BaiduMapAPI_Search.framework */; };
 		093D2D5E1CD0807200BA015B /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D2D5A1CD0807200BA015B /* BaiduMapAPI_Base.framework */; };
 		093D2D5F1CD0807200BA015B /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D2D5B1CD0807200BA015B /* BaiduMapAPI_Location.framework */; };
 		093D2D601CD0807200BA015B /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D2D5C1CD0807200BA015B /* BaiduMapAPI_Map.framework */; };
@@ -16,7 +17,7 @@
 		093D2D6A1CD2491F00BA015B /* RCTBDMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D691CD2491F00BA015B /* RCTBDMapMarker.m */; };
 		093D2D891CD5B7D800BA015B /* MyAnimatedAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D881CD5B7D800BA015B /* MyAnimatedAnnotationView.m */; };
 		094B6CFC1CC88F670025C6FB /* RCTBDMap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 094B6CFB1CC88F670025C6FB /* RCTBDMap.h */; };
-		094B6CFE1CC88F670025C6FB /* RCTBDMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 094B6CFD1CC88F670025C6FB /* RCTBDMap.m */; };
+		094B6CFE1CC88F670025C6FB /* RCTBDMap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 094B6CFD1CC88F670025C6FB /* RCTBDMap.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		091037E71D07291C00AA5038 /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Search.framework; path = SDK/BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
 		093D2D5A1CD0807200BA015B /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Base.framework; path = SDK/BaiduMapAPI_Base.framework; sourceTree = "<group>"; };
 		093D2D5B1CD0807200BA015B /* BaiduMapAPI_Location.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Location.framework; path = SDK/BaiduMapAPI_Location.framework; sourceTree = "<group>"; };
 		093D2D5C1CD0807200BA015B /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Map.framework; path = SDK/BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
@@ -47,7 +49,7 @@
 		093D2D881CD5B7D800BA015B /* MyAnimatedAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimatedAnnotationView.m; sourceTree = "<group>"; };
 		094B6CF81CC88F670025C6FB /* libRCTBDMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTBDMap.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		094B6CFB1CC88F670025C6FB /* RCTBDMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTBDMap.h; sourceTree = "<group>"; };
-		094B6CFD1CC88F670025C6FB /* RCTBDMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTBDMap.m; sourceTree = "<group>"; };
+		094B6CFD1CC88F670025C6FB /* RCTBDMap.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTBDMap.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				093D2D611CD0807200BA015B /* BaiduMapAPI_Utils.framework in Frameworks */,
+				091037E81D07291C00AA5038 /* BaiduMapAPI_Search.framework in Frameworks */,
 				093D2D5E1CD0807200BA015B /* BaiduMapAPI_Base.framework in Frameworks */,
 				093D2D5F1CD0807200BA015B /* BaiduMapAPI_Location.framework in Frameworks */,
 				093D2D601CD0807200BA015B /* BaiduMapAPI_Map.framework in Frameworks */,
@@ -68,6 +71,7 @@
 		0938D68B1CC8AFAC0017304D /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				091037E71D07291C00AA5038 /* BaiduMapAPI_Search.framework */,
 				093D2D5A1CD0807200BA015B /* BaiduMapAPI_Base.framework */,
 				093D2D5B1CD0807200BA015B /* BaiduMapAPI_Location.framework */,
 				093D2D5C1CD0807200BA015B /* BaiduMapAPI_Map.framework */,
@@ -99,7 +103,7 @@
 				093D2D871CD5B7D800BA015B /* MyAnimatedAnnotationView.h */,
 				093D2D881CD5B7D800BA015B /* MyAnimatedAnnotationView.m */,
 				094B6CFB1CC88F670025C6FB /* RCTBDMap.h */,
-				094B6CFD1CC88F670025C6FB /* RCTBDMap.m */,
+				094B6CFD1CC88F670025C6FB /* RCTBDMap.mm */,
 				093D2D621CD0964700BA015B /* RCTCovert+BDMap.h */,
 				093D2D631CD0964700BA015B /* RCTCovert+BDMap.m */,
 				093D2D651CD0E43C00BA015B /* RCTBDMapManager.h */,
@@ -168,7 +172,7 @@
 			files = (
 				093D2D6A1CD2491F00BA015B /* RCTBDMapMarker.m in Sources */,
 				093D2D891CD5B7D800BA015B /* MyAnimatedAnnotationView.m in Sources */,
-				094B6CFE1CC88F670025C6FB /* RCTBDMap.m in Sources */,
+				094B6CFE1CC88F670025C6FB /* RCTBDMap.mm in Sources */,
 				093D2D671CD0E43C00BA015B /* RCTBDMapManager.m in Sources */,
 				093D2D641CD0964700BA015B /* RCTCovert+BDMap.m in Sources */,
 			);
