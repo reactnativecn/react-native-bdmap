@@ -16,5 +16,14 @@
   "license": "ISC",
   "dependencies": {
     "fbemitter": "^2.1.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactnativecn/react-native-bdmap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/reactnativecn/react-native-bdmap/issues"
+  },
+  "homepage": "https://github.com/reactnativecn/react-native-bdmap#readme"
 }
