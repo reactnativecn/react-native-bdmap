@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		093D2D5E1CD0807200BA015B /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D2D5A1CD0807200BA015B /* BaiduMapAPI_Base.framework */; };
+		093D2D5F1CD0807200BA015B /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D2D5B1CD0807200BA015B /* BaiduMapAPI_Location.framework */; };
+		093D2D601CD0807200BA015B /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D2D5C1CD0807200BA015B /* BaiduMapAPI_Map.framework */; };
+		093D2D611CD0807200BA015B /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D2D5D1CD0807200BA015B /* BaiduMapAPI_Utils.framework */; };
+		093D2D641CD0964700BA015B /* RCTCovert+BDMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D631CD0964700BA015B /* RCTCovert+BDMap.m */; };
+		093D2D671CD0E43C00BA015B /* RCTBDMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D661CD0E43C00BA015B /* RCTBDMapManager.m */; };
+		093D2D6A1CD2491F00BA015B /* RCTBDMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D691CD2491F00BA015B /* RCTBDMapMarker.m */; };
+		093D2D891CD5B7D800BA015B /* MyAnimatedAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D881CD5B7D800BA015B /* MyAnimatedAnnotationView.m */; };
+		094B6CFC1CC88F670025C6FB /* RCTBDMap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 094B6CFB1CC88F670025C6FB /* RCTBDMap.h */; };
+		094B6CFE1CC88F670025C6FB /* RCTBDMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 094B6CFD1CC88F670025C6FB /* RCTBDMap.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		094B6CF61CC88F670025C6FB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				094B6CFC1CC88F670025C6FB /* RCTBDMap.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		093D2D5A1CD0807200BA015B /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Base.framework; path = SDK/BaiduMapAPI_Base.framework; sourceTree = "<group>"; };
+		093D2D5B1CD0807200BA015B /* BaiduMapAPI_Location.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Location.framework; path = SDK/BaiduMapAPI_Location.framework; sourceTree = "<group>"; };
+		093D2D5C1CD0807200BA015B /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Map.framework; path = SDK/BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
+		093D2D5D1CD0807200BA015B /* BaiduMapAPI_Utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Utils.framework; path = SDK/BaiduMapAPI_Utils.framework; sourceTree = "<group>"; };
+		093D2D621CD0964700BA015B /* RCTCovert+BDMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTCovert+BDMap.h"; sourceTree = "<group>"; };
+		093D2D631CD0964700BA015B /* RCTCovert+BDMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTCovert+BDMap.m"; sourceTree = "<group>"; };
+		093D2D651CD0E43C00BA015B /* RCTBDMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTBDMapManager.h; sourceTree = "<group>"; };
+		093D2D661CD0E43C00BA015B /* RCTBDMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTBDMapManager.m; sourceTree = "<group>"; };
+		093D2D681CD2491F00BA015B /* RCTBDMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTBDMapMarker.h; sourceTree = "<group>"; };
+		093D2D691CD2491F00BA015B /* RCTBDMapMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTBDMapMarker.m; sourceTree = "<group>"; };
+		093D2D871CD5B7D800BA015B /* MyAnimatedAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnimatedAnnotationView.h; sourceTree = "<group>"; };
+		093D2D881CD5B7D800BA015B /* MyAnimatedAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimatedAnnotationView.m; sourceTree = "<group>"; };
+		094B6CF81CC88F670025C6FB /* libRCTBDMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTBDMap.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		094B6CFB1CC88F670025C6FB /* RCTBDMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTBDMap.h; sourceTree = "<group>"; };
+		094B6CFD1CC88F670025C6FB /* RCTBDMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTBDMap.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		094B6CF51CC88F670025C6FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				093D2D611CD0807200BA015B /* BaiduMapAPI_Utils.framework in Frameworks */,
+				093D2D5E1CD0807200BA015B /* BaiduMapAPI_Base.framework in Frameworks */,
+				093D2D5F1CD0807200BA015B /* BaiduMapAPI_Location.framework in Frameworks */,
+				093D2D601CD0807200BA015B /* BaiduMapAPI_Map.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0938D68B1CC8AFAC0017304D /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				093D2D5A1CD0807200BA015B /* BaiduMapAPI_Base.framework */,
+				093D2D5B1CD0807200BA015B /* BaiduMapAPI_Location.framework */,
+				093D2D5C1CD0807200BA015B /* BaiduMapAPI_Map.framework */,
+				093D2D5D1CD0807200BA015B /* BaiduMapAPI_Utils.framework */,
+			);
+			name = SDK;
+			sourceTree = "<group>";
+		};
+		094B6CEF1CC88F670025C6FB = {
+			isa = PBXGroup;
+			children = (
+				0938D68B1CC8AFAC0017304D /* SDK */,
+				094B6CFA1CC88F670025C6FB /* RCTBDMap */,
+				094B6CF91CC88F670025C6FB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		094B6CF91CC88F670025C6FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				094B6CF81CC88F670025C6FB /* libRCTBDMap.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		094B6CFA1CC88F670025C6FB /* RCTBDMap */ = {
+			isa = PBXGroup;
+			children = (
+				093D2D871CD5B7D800BA015B /* MyAnimatedAnnotationView.h */,
+				093D2D881CD5B7D800BA015B /* MyAnimatedAnnotationView.m */,
+				094B6CFB1CC88F670025C6FB /* RCTBDMap.h */,
+				094B6CFD1CC88F670025C6FB /* RCTBDMap.m */,
+				093D2D621CD0964700BA015B /* RCTCovert+BDMap.h */,
+				093D2D631CD0964700BA015B /* RCTCovert+BDMap.m */,
+				093D2D651CD0E43C00BA015B /* RCTBDMapManager.h */,
+				093D2D661CD0E43C00BA015B /* RCTBDMapManager.m */,
+				093D2D681CD2491F00BA015B /* RCTBDMapMarker.h */,
+				093D2D691CD2491F00BA015B /* RCTBDMapMarker.m */,
+			);
+			path = RCTBDMap;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		094B6CF71CC88F670025C6FB /* RCTBDMap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 094B6D011CC88F670025C6FB /* Build configuration list for PBXNativeTarget "RCTBDMap" */;
+			buildPhases = (
+				094B6CF41CC88F670025C6FB /* Sources */,
+				094B6CF51CC88F670025C6FB /* Frameworks */,
+				094B6CF61CC88F670025C6FB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RCTBDMap;
+			productName = RCTBDMap;
+			productReference = 094B6CF81CC88F670025C6FB /* libRCTBDMap.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		094B6CF01CC88F670025C6FB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = DengYun;
+				TargetAttributes = {
+					094B6CF71CC88F670025C6FB = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 094B6CF31CC88F670025C6FB /* Build configuration list for PBXProject "RCTBDMap" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 094B6CEF1CC88F670025C6FB;
+			productRefGroup = 094B6CF91CC88F670025C6FB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				094B6CF71CC88F670025C6FB /* RCTBDMap */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		094B6CF41CC88F670025C6FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				093D2D6A1CD2491F00BA015B /* RCTBDMapMarker.m in Sources */,
+				093D2D891CD5B7D800BA015B /* MyAnimatedAnnotationView.m in Sources */,
+				094B6CFE1CC88F670025C6FB /* RCTBDMap.m in Sources */,
+				093D2D671CD0E43C00BA015B /* RCTBDMapManager.m in Sources */,
+				093D2D641CD0964700BA015B /* RCTCovert+BDMap.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		094B6CFF1CC88F670025C6FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		094B6D001CC88F670025C6FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		094B6D021CC88F670025C6FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SDK",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../../react-native/Libraries/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		094B6D031CC88F670025C6FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SDK",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../../react-native/Libraries/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		094B6CF31CC88F670025C6FB /* Build configuration list for PBXProject "RCTBDMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				094B6CFF1CC88F670025C6FB /* Debug */,
+				094B6D001CC88F670025C6FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		094B6D011CC88F670025C6FB /* Build configuration list for PBXNativeTarget "RCTBDMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				094B6D021CC88F670025C6FB /* Debug */,
+				094B6D031CC88F670025C6FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 094B6CF01CC88F670025C6FB /* Project object */;
+}
