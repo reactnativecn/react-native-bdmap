@@ -140,6 +140,18 @@ iOS: 添加依赖
 
 清除所有位置监听器
 
+#### geoReverse({latitude, longitude}) => Promise<object>
+
+逆地理编码. 返回编码信息以及Poi信息
+
+#### poiSearch({latitude, longitude}, {keyword, sortMode, radius, pageIndex, pageCapacity}) => Promise<object>
+
+* keyword: 搜索关键字
+* sortMode: 'composite': 综合排序 'nearToFar': 由近到远排序
+* radius: 搜索半径
+* pageIndex: 分页页码
+* pageCapacity: 分页每页个数
+
 ## class BDMapView extends React.Component
 
 地图组件.
