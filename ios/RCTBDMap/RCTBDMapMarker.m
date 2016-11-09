@@ -86,7 +86,7 @@ RCT_EXPORT_VIEW_PROPERTY(location, CLLocationCoordinate2D);
 
 RCT_CUSTOM_VIEW_PROPERTY(image, NSString*, RCTBDMapMarker)
 {
-    [self.bridge.imageLoader loadImageWithTag:[RCTConvert NSString:json] callback:^(NSError *error, UIImage *image) {
+    [self.bridge.imageLoader loadImageWithURLRequest:[RCTConvert NSString:json] callback:^(NSError *error, UIImage *image) {
         dispatch_async([self methodQueue], ^(void) {
             view.annotationImage = image;
             [view display];
