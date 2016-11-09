@@ -74,6 +74,7 @@
         if (marker == nil) {
             // Create new marker;
             marker = [[RCTBDMapMarker alloc] init];
+            marker.key = key;
             [self addAnnotation:marker];
         }
         marker.coordinate = [RCTConvert CLLocationCoordinate2D:dict];
