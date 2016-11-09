@@ -132,6 +132,9 @@ class BDMapView extends React.Component {
     }
   }
   onRegionChange = ev => {
+    if (!this.state.loaded) {
+      return;
+    }
     const {onRegionChange, blurMarkerWhileMove} = this.props;
 
     this._region = ev.nativeEvent;
@@ -143,6 +146,9 @@ class BDMapView extends React.Component {
     this.checkRegion(this.props);
   };
   onRegionChangeComplete = ev => {
+    if (!this.state.loaded) {
+      return;
+    }
     const {onRegionChange, onRegionChangeComplete} = this.props;
     this._region = ev.nativeEvent;
     onRegionChange && onRegionChange(ev.nativeEvent);
@@ -159,13 +165,6 @@ class BDMapView extends React.Component {
     }
     return ret;
   }
-  renderMarker = anno => {
-    return <BDMapMarker
-          {...anno}
-          key={anno.id}
-          mapView={this}
-        />;
-  };
   onMarkerPress(marker) {
     if (this._focusMarker === marker) {
       return;
@@ -179,6 +178,11 @@ class BDMapView extends React.Component {
   }
   onLoad = () => {
     const {onLoad} = this.props;
+    if (this._region) {
+      this._native.setNativeProps({
+        region: this._region
+      });
+    }
     onLoad && onLoad();
     this.setState({
       loaded: true,
@@ -203,11 +207,6 @@ class BDMapView extends React.Component {
     const {annotations, children, region, ...others} = this.propsWithoutEvents();
     const {loaded} = this.state;
 
-    //let infoWindow = null;
-    //if (this._focusMarker) {
-    //  infoWindow = this._focusMarker.renderInfoWindow();
-    //}
-
     return (
       <RCTBDMapView
         {...others}
@@ -217,7 +216,6 @@ class BDMapView extends React.Component {
         onRegionChange={this.onRegionChange}
         onRegionChangeComplete={this.onRegionChangeComplete}
       >
-        {/*infoWindow*/}
       </RCTBDMapView>
     );
   }
