@@ -8,7 +8,8 @@ import {
   View,
 } from 'react-native'
 
-const BDMapMarker = require('./BDMapMarker');
+var resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
+const defaultMarkerIcon = require('../assets/icon.png');
 
 class BDMapView extends React.Component {
   state = {};
@@ -47,6 +48,15 @@ class BDMapView extends React.Component {
       latitude: React.PropTypes.number.isRequired,
       longitude: React.PropTypes.number.isRequired,
 
+      // 标注图案
+      icon: PropTypes.oneOfType([
+        PropTypes.shape({
+          uri: PropTypes.string,
+        }),
+        // Opaque type returned by require('./image.jpg')
+        PropTypes.number,
+      ]),
+
       /**
        * Whether the pin should be draggable or not
        */
@@ -80,8 +90,7 @@ class BDMapView extends React.Component {
       /**
        * annotation id
        */
-      id: React.PropTypes.string,
-
+      id: React.PropTypes.string.isRequired,
     })),
 
     traceData: React.PropTypes.arrayOf(React.PropTypes.arrayOf(React.PropTypes.number)),
@@ -175,6 +184,21 @@ class BDMapView extends React.Component {
       loaded: true,
     })
   };
+  resolveAnnotationAssets = v => {
+    if (v.icon) {
+      var icon = resolveAssetSource(v.icon);
+      return {
+        ...v,
+        iconUrl: icon && icon.uri,
+      };
+    }
+    var icon = resolveAssetSource(this.props.icon || defaultMarkerIcon);
+    return {
+      ...v,
+      iconUrl: icon && icon.uri,
+    };
+    // return v;
+  }
   render() {
     const {annotations, children, region, ...others} = this.propsWithoutEvents();
     const {loaded} = this.state;
@@ -187,12 +211,12 @@ class BDMapView extends React.Component {
     return (
       <RCTBDMapView
         {...others}
+        annotations={loaded && annotations && annotations.map(this.resolveAnnotationAssets)}
         ref={ref=>this._native = ref}
         onLoad={this.onLoad}
         onRegionChange={this.onRegionChange}
         onRegionChangeComplete={this.onRegionChangeComplete}
       >
-        {loaded && annotations && annotations.map(this.renderMarker)}
         {/*infoWindow*/}
       </RCTBDMapView>
     );

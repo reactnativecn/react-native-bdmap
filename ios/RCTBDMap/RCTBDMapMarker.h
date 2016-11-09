@@ -11,18 +11,16 @@
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
 
 
-@interface RCTBDMapMarker : UIView <BMKAnnotation>
+@interface RCTBDMapMarker : NSObject <BMKAnnotation>
+
+@property (nonatomic) NSString* key;
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (nonatomic) CLLocationCoordinate2D location;
 
-@property (nonatomic, strong) UIImage *annotationImage;
+@property (nonatomic) BMKAnnotationView* annoView;
 
-@property (nonatomic) BMKMapView* mapView;
-@property (nonatomic) bool isDisplayed;
-@property (nonatomic) bool isRemoved;
+@property (nonatomic) UIImage * image;
+@property (nonatomic) NSString* imageUrl;
 
-@end
-
-@interface RCTBDMapMarkerManager : RCTViewManager
 @end

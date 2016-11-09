@@ -13,6 +13,7 @@
 #import "RCTBDMapMarker.h"
 #import "MyAnimatedAnnotationView.h"
 #import "UIView+React.h"
+#import "RCTImageLoader.h"
 
 @interface RCTBMKMapView : BMKMapView
 
@@ -35,33 +36,6 @@
     return self;
 }
 
-- (NSArray<UIView *> *)reactSubviews
-{
-    return _markers;
-}
-
-- (void)insertReactSubview:(RCTBDMapMarker *)view atIndex:(NSInteger)atIndex
-{
-    if (![view isKindOfClass:[RCTBDMapMarker class]]) {
-        RCTLogError(@"subview should be of type RCTBDMapMarker");
-        return;
-    }
-    [_markers addObject:view];
-    view.mapView = self;
-    if (view.isDisplayed) {
-        [self addAnnotation:view];
-    }
-}
-
-- (void)removeReactSubview:(RCTBDMapMarker *)subview
-{
-    [_markers removeObject:subview];
-    subview.isRemoved = true;
-    if (subview.isDisplayed) {
-        [self removeAnnotation:subview];
-    }
-}
-
 - (void)setTraceData:(NSArray*) data
 {
     if (self->trace != nil){
@@ -77,6 +51,61 @@
         }
         self->trace = [BMKPolyline polylineWithCoordinates:coords count:count];
         [self addOverlay:self->trace];
+    }
+}
+
+- (void) setAnnotations:(NSArray*)data withImageLoader:(RCTImageLoader*) loader
+{
+    NSMutableDictionary* oldMarkers = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* newMarkers = [[NSMutableDictionary alloc] init];
+    
+    NSArray* oldAnnos = [self annotations];
+    for (int i = [oldAnnos count] - 1; i>=0; i--) {
+        RCTBDMapMarker* anno = oldAnnos[i];
+        [oldMarkers setObject:anno forKey:anno.key];
+    }
+    
+    for (int i = [data count] - 1; i >=0; i--) {
+        NSDictionary* dict = data[i];
+        NSString* key = dict[@"id"];
+        
+        [newMarkers setObject:dict forKey:key];
+        RCTBDMapMarker* marker = oldMarkers[key];
+        if (marker == nil) {
+            // Create new marker;
+            marker = [[RCTBDMapMarker alloc] init];
+            [self addAnnotation:marker];
+        }
+        marker.coordinate = [RCTConvert CLLocationCoordinate2D:dict];
+        
+        NSString* imageUrl = dict[@"iconUrl"];
+        
+        if (imageUrl) {
+            if (![marker.imageUrl isEqualToString:imageUrl]) {
+              marker.imageUrl = imageUrl;
+              [loader loadImageWithURLRequest:[RCTConvert NSURLRequest:imageUrl] callback:^(NSError *error, UIImage *image) {
+                  dispatch_async(dispatch_get_main_queue(), ^(void) {
+                      if ([marker.imageUrl isEqualToString:imageUrl]) {
+                          marker.image = image;
+                      }
+                  });
+              }];
+            }
+        } else if (marker.imageUrl) {
+            marker.imageUrl = nil;
+            marker.image = nil;
+        }
+    }
+    
+    NSMutableArray* removedMarkers = [[NSMutableArray alloc] init];
+    for (int i = [oldAnnos count] - 1; i>=0; i--) {
+        RCTBDMapMarker* anno = oldAnnos[i];
+        if (newMarkers[anno.key] == nil) {
+            [removedMarkers addObject:anno];
+        }
+    }
+    if (removedMarkers.count > 0) {
+        [self removeAnnotations:removedMarkers];
     }
 }
 
@@ -108,6 +137,13 @@ RCT_CUSTOM_VIEW_PROPERTY(traceData, NSArray*, RCTBMKMapView)
 {
     if (json) {
         [view setTraceData: json];
+    }
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(annotations, NSArray*, RCTBMKMapView)
+{
+    if (json) {
+        [view setAnnotations: json withImageLoader: self.bridge.imageLoader];
     }
 }
 
@@ -145,25 +181,16 @@ RCT_CUSTOM_VIEW_PROPERTY(traceData, NSArray*, RCTBMKMapView)
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
 {
     if ([annotation isKindOfClass:[RCTBDMapMarker class]]) {
-        RCTBDMapMarker* marker = annotation;
         BMKAnnotationView* ret = [[BMKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
-        ret.image = marker.annotationImage;
+        ret.image = ((RCTBDMapMarker*)annotation).image;
         ret.canShowCallout = NO;
+        ((RCTBDMapMarker*)annotation).annoView = ret;
         return ret;
-//        return [[RCTBDMapMarker alloc] initWithAnnotation:annotation reuseIdentifier:nil];
     }
     return nil;
 }
 
 - (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view{
-    RCTBDMapMarker* marker = view.annotation;
-//    if (marker.onPress) {
-//        marker.onPress(@{});
-//    }
-    [self.bridge.eventDispatcher sendInputEventWithName:@"topPress" body:@{
-                                                                            @"target": marker.reactTag
-                                                                            }];
-    view.selected = false;
 }
 
 @end

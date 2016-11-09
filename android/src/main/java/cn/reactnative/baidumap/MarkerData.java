@@ -2,27 +2,19 @@ package cn.reactnative.baidumap;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.view.View;
 
-import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.Overlay;
-import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.Text;
-import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.facebook.common.executors.UiThreadImmediateExecutorService;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.common.util.UriUtil;
-import com.facebook.datasource.BaseDataSubscriber;
 import com.facebook.datasource.DataSource;
-import com.facebook.datasource.DataSubscriber;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipeline;
@@ -30,85 +22,71 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 /**
- * Created by tdzl2003 on 4/24/16.
+ * Created by tdzl2003 on 11/9/16.
  */
-public class MarkerFakeView extends OverlayFakeView{
-    public MarkerFakeView(Context context) {
-        super(context);
-        options = new MarkerOptions();
-    }
+public class MarkerData {
+    private MarkerOptions options = new MarkerOptions();
+    private Marker marker;
 
-    MarkerOptions getOptions() {
-        return (MarkerOptions)options;
-    }
+    private String iconUrl;
 
-    Marker getMarker() {
-        return (Marker)overlay;
-    }
-
-    private boolean shouldDisplay = false;
-    @Override
-    public void display() {
-        if (this.getOptions().getIcon() != null) {
-            super.display();
-        } else {
-            shouldDisplay = true;
-        }
-    }
-
-    private String lastIcon;
-
-    public void setIcon(final String imageUrl, MarkerManager manager) {
-        Uri uri = null;
-
-        uri = Uri.parse(imageUrl);
-        // Verify scheme is set, so that relative uri (used by static resources) are not handled.
-        if (uri.getScheme() == null) {
-            uri = getResourceDrawableUri(getContext(), imageUrl);
-        }
-
-        lastIcon = imageUrl;
-
-        this._getImage(uri, null, new ImageCallback() {
-            @Override
-            public void invoke(@Nullable Bitmap bitmap) {
-                BitmapDescriptor bmp = BitmapDescriptorFactory.fromBitmap(bitmap);
-                getOptions().icon(bmp);
-                if (overlay != null) {
-                    getMarker().setIcon(bmp);
-                }
-                if (shouldDisplay) {
-                    display();
-                    shouldDisplay = false;
-                }
-            }
-        });
-    }
-
-    public void onMarkerClick() {
-        ReactContext reactContext = (ReactContext)this.getContext();
-        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                this.getId(),
-                "topPress",
-                null);
+    public MarkerData(BitmapDescriptor defaultIcon) {
+        options.icon(defaultIcon);
     }
 
     public void setLocation(LatLng position) {
-        getOptions().position(position);
-
-        if (overlay != null) {
-            getMarker().setPosition(position);
+        options.position(position);
+        if (marker != null){
+            marker.setPosition(position);
         }
     }
 
-    public void setTitle(String title) {
-        getOptions().title(title);
-        if (overlay != null) {
-            getMarker().setTitle(title);
+    public void createMarker(MapView view) {
+        if (this.marker == null) {
+            marker = (Marker) view.getMap().addOverlay(options);
+        }
+    }
+
+    public void destroyMarker() {
+        if (this.marker != null) {
+            marker.remove();
+            marker = null;
+        }
+    }
+
+    public void setIcon(Context context, final String iconUrl, BitmapDescriptor defaultIcon) {
+        if (iconUrl != null &&
+                !iconUrl.equals(this.iconUrl)) {
+            this.iconUrl = iconUrl;
+            Uri uri = null;
+
+            uri = Uri.parse(iconUrl);
+            // Verify scheme is set, so that relative uri (used by static resources) are not handled.
+            if (uri.getScheme() == null) {
+                uri = getResourceDrawableUri(context, iconUrl);
+            }
+
+            this._getImage(uri, null, new ImageCallback() {
+                @Override
+                public void invoke(@Nullable Bitmap bitmap) {
+                    if (!iconUrl.equals(MarkerData.this.iconUrl)) {
+                        return;
+                    }
+                    BitmapDescriptor bmp = BitmapDescriptorFactory.fromBitmap(bitmap);
+                    options.icon(bmp);
+                    if (marker != null) {
+                        marker.setIcon(bmp);
+                    }
+                }
+            });
+        } else if (this.iconUrl != null && iconUrl == null){
+            this.iconUrl = null;
+            options.icon(defaultIcon);
+            if (marker != null) {
+                marker.setIcon(defaultIcon);
+            }
         }
     }
 

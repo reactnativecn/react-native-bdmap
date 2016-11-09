@@ -4,6 +4,8 @@ import android.view.View;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
@@ -67,12 +69,10 @@ public class BDMapManager extends ViewGroupManager<MapView>  {
         double longitudeDelta = region.hasKey("longitudeDelta") ? region.getDouble("longitudeDelta") / 2 : 0;
         double latitudeDelta = region.hasKey("latitudeDelta") ? region.getDouble("latitudeDelta") / 2 : 0;
 
-        view.getMap().setMapStatusLimits(
-                new LatLngBounds.Builder()
-                        .include(new LatLng(latitude - latitudeDelta, longitude - longitudeDelta))
-                        .include(new LatLng(latitude + latitudeDelta, longitude + longitudeDelta))
-                        .build()
-        );
+        view.getMap().animateMapStatus(MapStatusUpdateFactory.newLatLngBounds(new LatLngBounds.Builder()
+                .include(new LatLng(latitude - latitudeDelta, longitude - longitudeDelta))
+                .include(new LatLng(latitude + latitudeDelta, longitude + longitudeDelta))
+                .build()));
     }
 
     @ReactProp(name="traceData")
@@ -80,31 +80,8 @@ public class BDMapManager extends ViewGroupManager<MapView>  {
         BDMapExtraData.getExtraData(view).setTraceData(arr);
     }
 
-
-    // 处理标注物
-    @Override
-    public void addView(MapView parent, View child, int index) {
-        BDMapExtraData.getExtraData(parent).addView(child, index);
+    @ReactProp(name="annotations")
+    public void setAnnotations(MapView view, ReadableArray arr) {
+        BDMapExtraData.getExtraData(view).setAnnotations(arr);
     }
-
-    @Override
-    public int getChildCount(MapView parent) {
-        return BDMapExtraData.getExtraData(parent).getChildCount();
-    }
-
-    @Override
-    public View getChildAt(MapView parent, int index) {
-        return BDMapExtraData.getExtraData(parent).getChildAt(index);
-    }
-
-    @Override
-    public void removeViewAt(MapView parent, int index) {
-        BDMapExtraData.getExtraData(parent).removeViewAt(index);
-    }
-
-    @Override
-    public boolean needsCustomLayoutForChildren() {
-        return true;
-    }
-
 }

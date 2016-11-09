@@ -31,7 +31,6 @@ public class BDMapPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.asList(new ViewManager[]{
                 new BDMapManager(),
-                new MarkerManager(),
                 new InfoWindowManager()
         });
     }

@@ -8,32 +8,18 @@
 
 #import "RCTBDMapMarker.h"
 #import "RCTUIManager.h"
-#import "RCTImageLoader.h"
 #import "RCTImageUtils.h"
 
 @implementation RCTBDMapMarker
 
+@synthesize key = _key;
 @synthesize location = _location;
-@synthesize annotationImage = _annotationImage;
-@synthesize isDisplayed = _isDisplayed;
-@synthesize isRemoved = _isRemoved;
-@synthesize mapView = _mapView;
+@synthesize annoView = _annoView;
+@synthesize image = _image;
+@synthesize imageUrl = _imageUrl;
 
 - (instancetype)init {
-    _isDisplayed = false;
-    _isRemoved = false;
     return self;
-}
-
-- (void) display {
-    if (!_isDisplayed && !_isRemoved && _annotationImage) {
-        _isDisplayed = true;
-            
-        if (_mapView) {
-            [_mapView addAnnotation:self];
-//            [_mapView mapForceRefresh];
-        }
-    }
 }
 
 - (CLLocationCoordinate2D)coordinate
@@ -46,52 +32,15 @@
     _location = newCoordinate;
 }
 
-- (void)setAnnotationImage:(UIImage *)image {
-    _annotationImage = image;
+- (void)setImage:(UIImage *)image {
+    self->_image = image;
+    if (self->_annoView) {
+        self->_annoView.image = image;
+    }
 }
 
 - (NSString *)title {
     return @"";
-}
-
-@end
-
-@implementation RCTBDMapMarkerManager
-
-@synthesize bridge = _bridge;
-
-RCT_EXPORT_MODULE(RCTBDMapMarkerManager)
-
-- (dispatch_queue_t)methodQueue
-{
-    return dispatch_get_main_queue();
-}
-
-- (UIView *)view
-{
-    RCTBDMapMarker* ret = [[RCTBDMapMarker alloc] init];
-    return ret;
-}
-
-RCT_EXPORT_METHOD(display:(nonnull NSNumber *)reactTag)
-{
-//    [self.bridge.uiManager addUIBlock:
-//     ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
-//         RCTBDMapMarker *view = viewRegistry[reactTag];
-//         [view display];
-//     }];
-}
-
-RCT_EXPORT_VIEW_PROPERTY(location, CLLocationCoordinate2D);
-
-RCT_CUSTOM_VIEW_PROPERTY(image, NSString*, RCTBDMapMarker)
-{
-    [self.bridge.imageLoader loadImageWithURLRequest:[RCTConvert NSString:json] callback:^(NSError *error, UIImage *image) {
-        dispatch_async([self methodQueue], ^(void) {
-            view.annotationImage = image;
-            [view display];
-        });
-    }];
 }
 
 @end

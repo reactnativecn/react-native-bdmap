@@ -1,6 +1,6 @@
 {
   "name": "react-native-bdmap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "百度地图功能接入",
   "main": "src/index.js",
   "scripts": {

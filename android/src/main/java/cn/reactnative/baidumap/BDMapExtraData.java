@@ -1,8 +1,14 @@
 package cn.reactnative.baidumap;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
@@ -13,6 +19,7 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
@@ -31,6 +38,8 @@ public class BDMapExtraData implements LifecycleEventListener, BaiduMap.OnMapLoa
 
     private static Map<MapView, BDMapExtraData> extraDataMap = new HashMap<>();
 
+    private BitmapDescriptor defaultIcon;
+
     public BDMapExtraData(ReactContext context, MapView view) {
         this.view = view;
         this.reactContext = context;
@@ -41,6 +50,20 @@ public class BDMapExtraData implements LifecycleEventListener, BaiduMap.OnMapLoa
         view.getMap().setOnMapStatusChangeListener(this);
         view.getMap().setOnMarkerClickListener(this);
         reactContext.addLifecycleEventListener(this);
+        defaultIcon = drawableToBitmap(reactContext.getResources().getDrawable(R.drawable.bmap_default_icon));
+    }
+
+    static BitmapDescriptor drawableToBitmap(Drawable drawable) // drawable 转换成bitmap
+    {
+        int width = drawable.getIntrinsicWidth();// 取drawable的长宽
+        int height = drawable.getIntrinsicHeight();
+        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ?Bitmap.Config.ARGB_8888:Bitmap.Config.RGB_565;// 取drawable的颜色格式
+        Bitmap bitmap = Bitmap.createBitmap(width, height, config);// 建立对应bitmap
+        Canvas canvas = new Canvas(bitmap);// 建立对应bitmap的画布
+        drawable.setBounds(0, 0, width, height);
+        drawable.draw(canvas);// 把drawable内容画到画布中
+
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
 
@@ -112,46 +135,8 @@ public class BDMapExtraData implements LifecycleEventListener, BaiduMap.OnMapLoa
                 transformMapStatus(mapStatus));
     }
 
-    /* 标注物等内容处理 */
-    List<View> children = new ArrayList<View>();
-    public void addView(View child, int index) {
-        children.add(index, child);
-        if (child instanceof OverlayFakeView) {
-            OverlayFakeView fakeChild = (OverlayFakeView)child;
-            fakeChild.setMap(view.getMap());
-        } else if (child instanceof InfoWindowFakeView) {
-            InfoWindowFakeView fakeChild = (InfoWindowFakeView)child;
-            fakeChild.map = view.getMap();
-            fakeChild.maybeUpdate();
-        }
-    }
-
-    public int getChildCount() {
-        return children.size();
-    }
-
-    public View getChildAt(int index) {
-        return children.get(index);
-    }
-
-    public void removeViewAt(int index) {
-        View child = children.remove(index);
-        if (child instanceof OverlayFakeView) {
-            OverlayFakeView fakeChild = (OverlayFakeView)child;
-            fakeChild.setMap(null);
-//            fakeChild.overlay.remove();
-        } else if (child instanceof InfoWindowFakeView) {
-            InfoWindowFakeView fakeChild = (InfoWindowFakeView)child;
-            fakeChild.destroy();
-        }
-    }
-
     @Override
     public boolean onMarkerClick(Marker marker) {
-        MarkerFakeView view = (MarkerFakeView)OverlayFakeView.getFakeView(marker);
-        if (view != null) {
-            view.onMarkerClick();
-        }
         return true;
     }
 
@@ -176,6 +161,55 @@ public class BDMapExtraData implements LifecycleEventListener, BaiduMap.OnMapLoa
                 pts.add(new LatLng(item.getDouble(1), item.getDouble(0)));
             }
             trace = view.getMap().addOverlay(new PolylineOptions().points(pts).color(0xffff00ff).width(5));
+        }
+    }
+
+    private HashMap<String, MarkerData> annotations = new HashMap<String, MarkerData>();
+
+    private void updateMarkerInfo(MarkerData marker, ReadableMap map) {
+        double longitude = map.getDouble("longitude");
+        double latitude = map.getDouble("latitude");
+        LatLng position = new LatLng(latitude, longitude);
+        marker.setLocation(position);
+
+        if (map.hasKey("iconUrl")) {
+            marker.setIcon(reactContext, map.getString("iconUrl"), defaultIcon);
+        }
+    }
+
+    public void setAnnotations(ReadableArray newData) {
+        HashMap<String, MarkerData> newAnnos = new HashMap<String, MarkerData>();
+
+        for (int i = 0; i < newData.size(); i++) {
+            ReadableMap map = newData.getMap(i);
+            String key = map.getString("id");
+
+            MarkerData marker = annotations.get(key);
+
+
+            if (marker == null) {
+                marker = new MarkerData(defaultIcon);
+                annotations.put(key, marker);
+                updateMarkerInfo(marker, map);
+                marker.createMarker(view);
+            } else {
+                updateMarkerInfo(marker, map);
+            }
+
+            newAnnos.put(key, marker);
+        }
+
+        ArrayList<String> removedKeys = new ArrayList<>();
+        for (Map.Entry<String, MarkerData> entry:annotations.entrySet()) {
+            if (!newAnnos.containsKey(entry.getKey())) {
+                removedKeys.add(entry.getKey());
+            }
+        }
+
+        for (String key : removedKeys) {
+            MarkerData data = annotations.get(key);
+            data.destroyMarker();
+            annotations.remove(key);
         }
     }
 }
