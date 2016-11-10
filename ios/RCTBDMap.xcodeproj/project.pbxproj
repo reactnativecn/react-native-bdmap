@@ -15,7 +15,6 @@
 		093D2D641CD0964700BA015B /* RCTCovert+BDMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D631CD0964700BA015B /* RCTCovert+BDMap.m */; };
 		093D2D671CD0E43C00BA015B /* RCTBDMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D661CD0E43C00BA015B /* RCTBDMapManager.m */; };
 		093D2D6A1CD2491F00BA015B /* RCTBDMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D691CD2491F00BA015B /* RCTBDMapMarker.m */; };
-		093D2D891CD5B7D800BA015B /* MyAnimatedAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D2D881CD5B7D800BA015B /* MyAnimatedAnnotationView.m */; };
 		094B6CFC1CC88F670025C6FB /* RCTBDMap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 094B6CFB1CC88F670025C6FB /* RCTBDMap.h */; };
 		094B6CFE1CC88F670025C6FB /* RCTBDMap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 094B6CFD1CC88F670025C6FB /* RCTBDMap.mm */; };
 /* End PBXBuildFile section */
@@ -45,8 +44,6 @@
 		093D2D661CD0E43C00BA015B /* RCTBDMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTBDMapManager.m; sourceTree = "<group>"; };
 		093D2D681CD2491F00BA015B /* RCTBDMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTBDMapMarker.h; sourceTree = "<group>"; };
 		093D2D691CD2491F00BA015B /* RCTBDMapMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTBDMapMarker.m; sourceTree = "<group>"; };
-		093D2D871CD5B7D800BA015B /* MyAnimatedAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnimatedAnnotationView.h; sourceTree = "<group>"; };
-		093D2D881CD5B7D800BA015B /* MyAnimatedAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimatedAnnotationView.m; sourceTree = "<group>"; };
 		094B6CF81CC88F670025C6FB /* libRCTBDMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTBDMap.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		094B6CFB1CC88F670025C6FB /* RCTBDMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTBDMap.h; sourceTree = "<group>"; };
 		094B6CFD1CC88F670025C6FB /* RCTBDMap.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTBDMap.mm; sourceTree = "<group>"; };
@@ -100,8 +97,6 @@
 		094B6CFA1CC88F670025C6FB /* RCTBDMap */ = {
 			isa = PBXGroup;
 			children = (
-				093D2D871CD5B7D800BA015B /* MyAnimatedAnnotationView.h */,
-				093D2D881CD5B7D800BA015B /* MyAnimatedAnnotationView.m */,
 				094B6CFB1CC88F670025C6FB /* RCTBDMap.h */,
 				094B6CFD1CC88F670025C6FB /* RCTBDMap.mm */,
 				093D2D621CD0964700BA015B /* RCTCovert+BDMap.h */,
@@ -171,7 +166,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				093D2D6A1CD2491F00BA015B /* RCTBDMapMarker.m in Sources */,
-				093D2D891CD5B7D800BA015B /* MyAnimatedAnnotationView.m in Sources */,
 				094B6CFE1CC88F670025C6FB /* RCTBDMap.mm in Sources */,
 				093D2D671CD0E43C00BA015B /* RCTBDMapManager.m in Sources */,
 				093D2D641CD0964700BA015B /* RCTCovert+BDMap.m in Sources */,
