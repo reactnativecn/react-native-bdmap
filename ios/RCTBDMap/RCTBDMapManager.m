@@ -11,7 +11,6 @@
 #import "RCTCovert+BDMap.h"
 #import "RCTEventDispatcher.h"
 #import "RCTBDMapMarker.h"
-#import "MyAnimatedAnnotationView.h"
 #import "UIView+React.h"
 #import "RCTImageLoader.h"
 

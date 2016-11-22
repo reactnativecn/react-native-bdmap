@@ -61,9 +61,6 @@ exports.getLocation = async function(options) {
   try {
     return await new Promise((resolve,reject) => {
       watchId = exports.watchPosition(resolve, reject, options);
-      if (watcherCount++ == 0) {
-        NativeBDMap.startWatch();
-      }
     });
   } finally {
     exports.clearWatch(watchId);
