@@ -34,6 +34,7 @@ exports.watchPosition = function (callback, error, options) {
   if (watcherCount++ == 0) {
     NativeBDMap.startWatch();
   }
+  return watchId;
 }
 
 exports.clearWatch = function (watchId) {
