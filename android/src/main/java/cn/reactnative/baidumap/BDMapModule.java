@@ -108,6 +108,7 @@ public class BDMapModule extends ReactContextBaseJavaModule implements BDLocatio
         return new LatLng(pos.getDouble("latitude"), pos.getDouble("longitude"));
     }
 
+    @ReactMethod
     public void getDistance(ReadableMap pos1, ReadableMap pos2, Promise promise) {
         promise.resolve(DistanceUtil.getDistance(readLatLng(pos1), readLatLng(pos2)));
     }
