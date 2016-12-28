@@ -1,11 +1,5 @@
 ## 安装
 
-首先安装rnpm
-
-```
-npm install -g rnpm
-```
-
 ```
 npm install react-native-bdmap
 react-native link react-native-bdmap
@@ -176,11 +170,15 @@ iOS: 添加依赖
 典型写法:
 
 ```
+import { BDMapView } from 'react-native-bdmap';
+
+//...
+
     state = {};
     render() {
-      return <MapView 
+      return <BDMapView 
         region={this.state.region} 
-        onRegionChange={region=>this.setState({region})}
+        onRegionChange={region => this.setState({region})}
         />
     }
 ```
