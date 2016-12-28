@@ -1,7 +1,7 @@
 ## 安装
 
 ```
-npm install react-native-bdmap
+npm install react-native-bdmap --save
 react-native link react-native-bdmap
 ```
 
