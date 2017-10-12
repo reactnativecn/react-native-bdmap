@@ -6,7 +6,7 @@
 //  Copyright © 2016 DengYun. All rights reserved.
 //
 
-#import "RCTConvert.h"
+#import <React/RCTConvert.h>
 
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>//引入计算工具所有的头文件

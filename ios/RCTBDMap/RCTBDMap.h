@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入搜索所需的头文件
 

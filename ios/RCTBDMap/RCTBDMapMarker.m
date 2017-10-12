@@ -7,8 +7,7 @@
 //
 
 #import "RCTBDMapMarker.h"
-#import "RCTUIManager.h"
-#import "RCTImageUtils.h"
+#import <React/RCTUIManager.h>
 
 @implementation RCTBDMapMarker
 

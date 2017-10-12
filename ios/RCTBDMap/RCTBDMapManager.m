@@ -9,10 +9,10 @@
 #import "RCTBDMapManager.h"
 #import "RCTBDMap.h"
 #import "RCTCovert+BDMap.h"
-#import "RCTEventDispatcher.h"
+#import <React/RCTEventDispatcher.h>
 #import "RCTBDMapMarker.h"
-#import "UIView+React.h"
-#import "RCTImageLoader.h"
+#import <React/UIView+React.h>
+#import <React/RCTImageLoader.h>
 
 @interface RCTBMKMapView : BMKMapView
 
